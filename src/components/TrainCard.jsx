@@ -14,11 +14,13 @@ export default function TrainCard({ train }) {
       </div>
 
       <div className="train-route">
-        {train.from} → {train.to}
+        <div>{train.from}</div>
+        <div className="train-arrow">→</div>
+        <div>{train.to}</div>
       </div>
 
       <div className="train-footer">
-        {train.departure}
+        Відправлення: {train.departure}
       </div>
     </div>
   );
