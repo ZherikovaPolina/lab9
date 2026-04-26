@@ -46,8 +46,8 @@ export default function BookingForm() {
 
       {error && <p className="error">{error}</p>}
 
-      <button onClick={handleSubmit}>
-        Забронювати
+      <button onClick={handleSubmit} disabled={selectedSeats.length === 0}>
+        Забронювати ({selectedSeats.length})
       </button>
     </div>
   );
