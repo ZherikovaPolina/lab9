@@ -11,9 +11,17 @@ export default function BookingForm() {
     email: "",
   });
 
+  const [error, setError] = useState("");
+
   const handleSubmit = () => {
+    if (!form.name || !form.phone || !form.email) {
+      setError("Заповніть всі поля");
+      return;
+    }
+
     saveBooking(selectedSeats, form, selectedWagon);
     setSelectedSeats([]);
+    setError("");
   };
 
   return (
@@ -35,6 +43,8 @@ export default function BookingForm() {
         value={form.email}
         onChange={(e) => setForm({ ...form, email: e.target.value })}
       />
+
+      {error && <p className="error">{error}</p>}
 
       <button onClick={handleSubmit}>
         Забронювати
