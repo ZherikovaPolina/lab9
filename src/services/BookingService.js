@@ -1,5 +1,9 @@
 export function saveBooking(seats) {
-  localStorage.setItem("bookedSeats", JSON.stringify(seats));
+  const existing = JSON.parse(localStorage.getItem("bookedSeats")) || [];
+
+  const updated = [...existing, ...seats];
+
+  localStorage.setItem("bookedSeats", JSON.stringify(updated));
 }
 
 export function getBookedSeats() {
