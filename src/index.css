@@ -102,3 +102,138 @@ body {
   color: white;
 }
 
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 60px);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.seat {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: green;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.seat:hover {
+  transform: scale(1.05);
+}
+
+.seat.selected {
+  background: #3b82f6;
+}
+
+.seat.booked {
+  background: #ef4444;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.booking-form {
+  margin-top: 20px;
+  padding: 20px;
+  background: #1e293b;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.booking-form input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #0f172a;
+  color: white;
+}
+
+.booking-form button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.booking-form button:hover {
+  background: #2563eb;
+}
+
+.booking-form button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #ef4444;
+}
+
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #22c55e;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  animation: fade 0.3s ease-in-out;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .seat-grid {
+    grid-template-columns: repeat(4, 50px);
+  }
+
+  .train-route {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seat-grid {
+    grid-template-columns: repeat(4, 45px);
+    gap: 6px;
+  }
+
+  .seat {
+    height: 45px;
+  }
+
+  .wagon-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .train-route {
+    font-size: 14px;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
