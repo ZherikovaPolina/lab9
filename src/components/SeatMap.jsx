@@ -3,14 +3,23 @@ import { useBooking } from "../context/BookingContext";
 import { getBookedSeats } from "../services/BookingService";
 
 export default function SeatMap() {
-  const { selectedSeats, setSelectedSeats } = useBooking();
+  const {
+    selectedSeats,
+    setSelectedSeats,
+    selectedWagon,
+  } = useBooking();
 
   const [bookedSeats, setBookedSeats] = useState([]);
 
   useEffect(() => {
     const data = getBookedSeats();
-    setBookedSeats(data);
-  }, []);
+
+    const filtered = data
+      .filter((b) => b.wagonId === selectedWagon)
+      .map((b) => b.seat);
+
+    setBookedSeats(filtered);
+  }, [selectedWagon]);
 
   const seats = Array.from({ length: 32 }, (_, i) => i + 1);
 
@@ -33,7 +42,11 @@ export default function SeatMap() {
         else if (selectedSeats.includes(seat)) className += " selected";
 
         return (
-          <div key={seat} className={className} onClick={() => toggleSeat(seat)}>
+          <div
+            key={seat}
+            className={className}
+            onClick={() => toggleSeat(seat)}
+          >
             {seat}
           </div>
         );
