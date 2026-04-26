@@ -8,6 +8,10 @@ export function BookingProvider({ children }) {
 
   const [refresh, setRefresh] = useState(false);
 
+  const refreshSeats = () => {
+    setRefresh((prev) => !prev);
+  };
+
   return (
     <BookingContext.Provider
       value={{
@@ -16,7 +20,7 @@ export function BookingProvider({ children }) {
         selectedWagon,
         setSelectedWagon,
         refresh,
-        setRefresh,
+        refreshSeats,
       }}
     >
       {children}
