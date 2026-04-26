@@ -7,6 +7,7 @@ export default function SeatMap() {
     selectedSeats,
     setSelectedSeats,
     selectedWagon,
+    refresh,
   } = useBooking();
 
   const [bookedSeats, setBookedSeats] = useState([]);
@@ -19,7 +20,7 @@ export default function SeatMap() {
       .map((b) => b.seat);
 
     setBookedSeats(filtered);
-  }, [selectedWagon]);
+  }, [selectedWagon, refresh]);
 
   const seats = Array.from({ length: 32 }, (_, i) => i + 1);
 
