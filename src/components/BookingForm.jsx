@@ -4,7 +4,12 @@ import { saveBooking } from "../services/BookingService";
 import Toast from "./Toast";
 
 export default function BookingForm() {
-  const { selectedSeats, setSelectedSeats, selectedWagon } = useBooking();
+  const {
+    selectedSeats,
+    setSelectedSeats,
+    selectedWagon,
+    refreshSeats,
+  } = useBooking();
 
   const [form, setForm] = useState({
     name: "",
@@ -20,6 +25,8 @@ export default function BookingForm() {
     saveBooking(selectedSeats, form, selectedWagon);
 
     setSelectedSeats([]);
+
+    refreshSeats();
 
     setToast(true);
     setTimeout(() => setToast(false), 2000);
