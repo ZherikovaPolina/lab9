@@ -3,7 +3,7 @@ import { useBooking } from "../context/BookingContext";
 import { saveBooking } from "../services/BookingService";
 import Toast from "./Toast";
 
-export default function BookingForm() {
+export default function BookingForm({ trainId }) {
   const {
     selectedSeats,
     setSelectedSeats,
@@ -22,7 +22,7 @@ export default function BookingForm() {
   const handleSubmit = () => {
     if (!form.name || !form.phone || !form.email) return;
 
-    saveBooking(selectedSeats, form, selectedWagon);
+    saveBooking(selectedSeats, form, selectedWagon, trainId);
 
     setSelectedSeats([]);
 
