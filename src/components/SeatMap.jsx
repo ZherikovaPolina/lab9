@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useBooking } from "../context/BookingContext";
 import { getBookedSeats } from "../services/BookingService";
 
-export default function SeatMap() {
+export default function SeatMap({ trainId }) {
   const {
     selectedSeats,
     setSelectedSeats,
@@ -16,11 +16,15 @@ export default function SeatMap() {
     const data = getBookedSeats();
 
     const filtered = data
-      .filter((b) => b.wagonId === selectedWagon)
+      .filter(
+        (b) =>
+          b.wagonId === selectedWagon &&
+          String(b.trainId) === String(trainId)
+      )
       .map((b) => b.seat);
 
     setBookedSeats(filtered);
-  }, [selectedWagon, refresh]);
+  }, [selectedWagon, trainId, refresh]);
 
   const seats = Array.from({ length: 32 }, (_, i) => i + 1);
 
