@@ -6,14 +6,16 @@ export default function WagonSelector() {
   const wagons = [1, 2, 3, 4];
 
   return (
-    <div>
-      {wagons.map((w) => (
+    <div className="wagon-wrapper">
+      {wagons.map((wagon) => (
         <button
-          key={w}
-          onClick={() => setSelectedWagon(w)}
-          className={selectedWagon === w ? "active" : ""}
+          key={wagon}
+          onClick={() => setSelectedWagon(wagon)}
+          className={`wagon-btn ${
+            selectedWagon === wagon ? "active" : ""
+          }`}
         >
-          Вагон {w}
+          Вагон {wagon}
         </button>
       ))}
     </div>
