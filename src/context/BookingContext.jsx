@@ -6,6 +6,8 @@ export function BookingProvider({ children }) {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedWagon, setSelectedWagon] = useState(1);
 
+  const [refresh, setRefresh] = useState(false);
+
   return (
     <BookingContext.Provider
       value={{
@@ -13,6 +15,8 @@ export function BookingProvider({ children }) {
         setSelectedSeats,
         selectedWagon,
         setSelectedWagon,
+        refresh,
+        setRefresh,
       }}
     >
       {children}
