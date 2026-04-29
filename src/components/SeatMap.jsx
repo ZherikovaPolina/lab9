@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useBooking } from "../context/BookingContext";
-import { getBookedSeats } from "../services/BookingService";
+import {
+  getBookedSeats,
+  removeBooking,
+} from "../services/BookingService";
 
 export default function SeatMap({ trainId }) {
   const {
@@ -8,6 +11,7 @@ export default function SeatMap({ trainId }) {
     setSelectedSeats,
     selectedWagon,
     refresh,
+    refreshSeats,
   } = useBooking();
 
   const [bookedSeats, setBookedSeats] = useState([]);
@@ -39,23 +43,46 @@ export default function SeatMap({ trainId }) {
   };
 
   return (
-    <div className="seat-grid">
-      {seats.map((seat) => {
-        let className = "seat";
+    <>
+      <div className="seat-grid">
+        {seats.map((seat) => {
+          let className = "seat";
 
-        if (bookedSeats.includes(seat)) className += " booked";
-        else if (selectedSeats.includes(seat)) className += " selected";
+          if (bookedSeats.includes(seat)) className += " booked";
+          else if (selectedSeats.includes(seat)) className += " selected";
 
-        return (
-          <div
-            key={seat}
-            className={className}
-            onClick={() => toggleSeat(seat)}
-          >
-            {seat}
+          return (
+            <div
+              key={seat}
+              className={className}
+              onClick={() => toggleSeat(seat)}
+            >
+              {seat}
+            </div>
+          );
+        })}
+      </div>
+
+      {bookedSeats.length > 0 && (
+        <div className="cancel-wrapper">
+          <h3>Скасувати бронювання</h3>
+
+          <div className="cancel-list">
+            {bookedSeats.map((seat) => (
+              <button
+                key={seat}
+                className="cancel-btn"
+                onClick={() => {
+                  removeBooking(seat, selectedWagon, trainId);
+                  refreshSeats();
+                }}
+              >
+                ❌ Місце {seat}
+              </button>
+            ))}
           </div>
-        );
-      })}
-    </div>
+        </div>
+      )}
+    </>
   );
 }
